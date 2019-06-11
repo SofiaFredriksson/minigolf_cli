@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20190610131806) do
 
   create_table "holes", force: :cascade do |t|
     t.integer "par"
+    t.integer "stroke"
     t.string  "name"
   end
 
