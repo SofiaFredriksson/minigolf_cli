@@ -1,6 +1,12 @@
 class Hole < ActiveRecord::Base
-    has_many :game_holes
-    has_many :games, through: :game_holes 
+    belongs_to :game
+    belongs_to :player 
 
-   
+   def set_score
+    self.stroke(random_score)
+   end
+
+   def random_score
+    rand(1..10)
+   end
 end 

@@ -1,18 +1,14 @@
 class Player < ActiveRecord::Base
     has_many :games
-    has_many :courses, through: :games
-
-    def total_strokes
-        self.games.first.holes.map{|hole| hole.stroke}.sum
-    end 
+    has_many :holes, through: :games
     
-    def score(id)
-        game = Game.find{|game| game.id == id}
-        total = self.strokes - game.total_par
-        total
-    end 
-
-    def all_scores
-        self.games.map{|game| self.score(game.id)}
+    def create_game 
+        Game.create(score: total_score)
     end
+
+    def create_hole
+
+        Hole.create(player: self, game_id: 2, par: 2, stroke: rand(1..10))
+    end
+    
 end
