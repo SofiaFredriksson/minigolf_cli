@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 20190610131759) do
 
   create_table "games", force: :cascade do |t|
     t.integer "score"
+    t.integer "player_id"
   end
 
   create_table "holes", force: :cascade do |t|

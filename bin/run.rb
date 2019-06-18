@@ -1,4 +1,4 @@
 require_relative '../config/environment'
 
-
-run
+user = find_user
+run(user)
