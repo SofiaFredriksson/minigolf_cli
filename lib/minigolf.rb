@@ -5,11 +5,13 @@ def menu
 
     1. Start a new game!
 
-    2. games - Check on how you've done in previous games 
+    2. Check your score!
 
-    3. exit - Are you sick of this yet? It's totally ok to leave 
+    3. putt - Hit a stroke! Will it be a par? Triple Bogey? Nobody knows!
 
-    4. putt - Hit a stroke! Will it be a par? Triple Bogey? Nobody knows!
+    4. exit - Are you sick of this yet? It's totally ok to leave 
+
+    
 
     MENU
     puts msg
@@ -48,7 +50,12 @@ def new_game(user)
 end
 
 def create_hole(user, game)
-    Hole.create(player: user, game: game, par: 2, stroke: rand(1..10))
+    if game 
+        Hole.create(player: user, game: game, par: 2, stroke: rand(1..10))
+        puts "#{user.holes.last.stroke}"
+    else 
+        puts "Press 1 to start a new game!"
+    end 
 end
 
 
@@ -60,6 +67,7 @@ end
 
 def run(user)
     input = ""
+    
 
     while input
         menu
@@ -67,22 +75,28 @@ def run(user)
     case input 
     when '1'
         s_b
+        counter = 0
         game = new_game(user)
         puts "Game started, putt 9 times!"
         s_b
     when '2'
         s_b
-        puts "#{game.total_score}"
+        game.update(score: game.total_score)
+        puts "#{game.score}"
         s_b
-    when '3'
+    when '4'
         s_b
         puts 'See ya later' 
         s_b
         break
-    when '4'
+    when '3'
         s_b
+        if counter < 9
         create_hole(user, game)
-        puts "#{user.holes.last.stroke}"
+        counter += 1
+        else
+            puts "That's enough! Check your score!"
+        end 
         s_b
     else
         s_b
