@@ -6,5 +6,7 @@ class Player < ActiveRecord::Base
     #     Game.create(score: total_score)
     # end
 
-  
+    def all_games
+        self.games.each_with_index.map{|game, index| "Game: #{index+1} |||| Score: #{game.score}" }.join()
+    end
 end

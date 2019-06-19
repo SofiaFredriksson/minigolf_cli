@@ -1,13 +1,13 @@
 def menu
     msg = <<-MENU
-    Welcome to Shittygolf, the worlds worst virtual MiniGold game. 
+    Welcome to FiaGolf, the worlds worst virtual MiniGold game. 
     Type in a command from the list, and have a nice round!
 
     1. Start a new game!
 
     2. Check your score!
 
-    3. putt - Hit a stroke! Will it be a par? Triple Bogey? Nobody knows!
+    3. Hit a stroke! Will it be a par? Triple Bogey? Nobody knows!
 
     4. exit - Are you sick of this yet? It's totally ok to leave 
 
@@ -19,7 +19,7 @@ end
 
 def menu_2
     msg = <<-MENU
-    Welcome to Shittygolf, the worlds worst virtual MiniGold game. 
+    Welcome to FiaGolf, the worlds worst virtual MiniGold game. 
     Type in a command from the list, and have a nice round!
 
     1. putt - Hit a stroke! Will it be a par? Triple Bogey? Nobody knows!
@@ -60,12 +60,15 @@ end
 
 
 
+
+
+
     ###################
     ###### MENUS ######
     ###################
 
 
-def run(user)
+def main_menu(user)
     input = ""
     
 
