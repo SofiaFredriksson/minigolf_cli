@@ -11,6 +11,7 @@ class Player < ActiveRecord::Base
             puts "Game: #{index+1} |||| Score: #{game.score * -1} under par"
         end 
     end 
+    puts "Press enter to return to menu"
     end
 
     def new_game

@@ -52,19 +52,24 @@ def main_menu(user)
     input = ""
     
     while input
-        menu
         input = gets.downcase.strip
         case input 
         when '1'
             s_b
             counter = 0
             game = user.new_game
-            puts "Game started, putt 9 times!"
+            puts "Game started! You have 9 holes to get through. Press 3 to putt!"
             s_b
         when '2'
+            if !game || game.holes.count < 9
+                s_b
+                puts "Hold your horses! You need to complete a game first!"
+                s_b
+            else 
             s_b
             game.update_score
             s_b
+            end
         when '5'
             s_b
             puts 'See ya later' 
@@ -76,7 +81,7 @@ def main_menu(user)
             user.create_hole(game)
             counter += 1
             else
-                puts "That's enough! Check your score!"
+                puts "That's enough! Press 2 to check your score!"
             end 
             s_b
         when '4'
