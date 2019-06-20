@@ -9,4 +9,9 @@ class Game < ActiveRecord::Base
     def total_score
         self.holes.map{|hole| hole.stroke}.sum
     end
+
+    def final_score
+        score = self.total_score - 18
+        score
+    end
 end 

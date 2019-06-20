@@ -9,9 +9,9 @@ def menu
 
     3. Hit a stroke! Will it be a par? Triple Bogey? Nobody knows!
 
-    4. exit - Are you sick of this yet? It's totally ok to leave 
+    4. Check out your past scores! 
 
-    
+    5. exit - Are you sick of this yet? It's totally ok to leave 
 
     MENU
     puts msg
@@ -39,72 +39,64 @@ def find_user
     username = gets.chomp
     if Player.find_by(name: username)
         Player.find_by(name: username)
-        puts 'user found'
     else
         Player.create(name: username)
     end 
 end 
 
-def new_game(user)
-    Game.create(score: 0, player: user)
-end
-
-def create_hole(user, game)
-    if game 
-        Hole.create(player: user, game: game, par: 2, stroke: rand(1..10))
-        puts "#{user.holes.last.stroke}"
-    else 
-        puts "Press 1 to start a new game!"
-    end 
-end
-
-
-
-
-
-
     ###################
     ###### MENUS ######
     ###################
 
-
 def main_menu(user)
     input = ""
     
-
     while input
         menu
-    input = gets.downcase.strip
-    case input 
-    when '1'
-        s_b
-        counter = 0
-        game = new_game(user)
-        puts "Game started, putt 9 times!"
-        s_b
-    when '2'
-        s_b
-        game.update(score: game.total_score)
-        puts "#{game.score}"
-        s_b
-    when '4'
-        s_b
-        puts 'See ya later' 
-        s_b
-        break
-    when '3'
-        s_b
-        if counter < 9
-        create_hole(user, game)
-        counter += 1
+        input = gets.downcase.strip
+        case input 
+        when '1'
+            s_b
+            counter = 0
+            game = user.new_game
+            puts "Game started, putt 9 times!"
+            s_b
+        when '2'
+            s_b
+            if !game || game.holes.count < 9
+                puts "Hold your horses! You need to complete a game first!"
+            else 
+                game.update(score: game.final_score)
+                if game.score > 0
+                    puts "#{game.score} over par"
+                else
+                    puts "#{game.score * (-1)} under par"
+                end
+                input = '2'
+            end 
+            s_b
+        when '5'
+            s_b
+            puts 'See ya later' 
+            s_b
+            break
+        when '3'
+            s_b
+            if counter < 9
+            user.create_hole(game)
+            counter += 1
+            else
+                puts "That's enough! Check your score!"
+            end 
+            s_b
+        when '4'
+            s_b
+            user.all_games
+            s_b
         else
-            puts "That's enough! Check your score!"
-        end 
-        s_b
-    else
-        s_b
-        menu
-        s_b
-    end
-end 
+            s_b
+            menu
+            s_b
+        end
+    end 
 end 
