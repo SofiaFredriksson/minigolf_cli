@@ -3,6 +3,7 @@ class Player < ActiveRecord::Base
     has_many :holes, through: :games
 
     def all_games
+        reload()
       self.games.each_with_index.map do |game, index| 
         if game.score > 0
             puts "Game: #{index+1} |||| Score: #{game.score} over par"

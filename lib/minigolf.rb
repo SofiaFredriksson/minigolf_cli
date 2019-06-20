@@ -63,17 +63,7 @@ def main_menu(user)
             s_b
         when '2'
             s_b
-            if !game || game.holes.count < 9
-                puts "Hold your horses! You need to complete a game first!"
-            else 
-                game.update(score: game.final_score)
-                if game.score > 0
-                    puts "#{game.score} over par"
-                else
-                    puts "#{game.score * (-1)} under par"
-                end
-                input = '2'
-            end 
+            game.update_score
             s_b
         when '5'
             s_b
